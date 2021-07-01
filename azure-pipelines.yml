@@ -1,0 +1,30 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- task: AzureResourceManagerTemplateDeployment@3
+  inputs:
+    deploymentScope: 'Resource Group'
+    azureResourceManagerConnection: 'AzureDemoPractice-Conn'
+    subscriptionId: '11237eda-93a0-485e-8f1f-020cb9e2cb31'
+    action: 'Create Or Update Resource Group'
+    resourceGroupName: 'AzureRG'
+    location: 'East US'
+    templateLocation: 'URL of the file'
+    csmFileLink: 'https://raw.githubusercontent.com/krishvenkybe/Azure/main/azuredeploy.json'
+    overrideParameters: '-projectname AzureDemo'
+    deploymentMode: 'Incremental'
+    deploymentName: 'AzureDemoPipeline'
+
+- script: |
+    echo Add other tasks to build, test, and deploy your project.
+    echo See https://aka.ms/yaml
+  displayName: 'Run a multi-line script'
