@@ -29,7 +29,7 @@
     "variables": {
         "appserviceplan": "[concat(parameters('projectname'), 'Plan')]",
         "appname": "[concat(parameters('projectname'), 'webapp')]",
-        "storageaccountname": "[concat(parameters('projectname'), uniqueString(resourceGroup().id))]"
+        "storageaccountname": "[concat(tolower(parameters('projectname')), uniqueString(resourceGroup().id))]"
     },
     "resources": [
         {   
@@ -39,7 +39,7 @@
             "properties": {
                 "mode" : "Incremental",
                 "templateLink": {
-                    "relativepath" : "linkedtemplate.json"
+                    "relativepath" : "linkedtemplate"
                 },
                 "parameters": {
                     "storageaccountname" : {
